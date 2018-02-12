@@ -89,6 +89,10 @@ public class Pubsub implements WebSocketClientImpl.EventHandler {
      * @param config the skygear config
      */
     public void configure(Configuration config) {
+        if (!config.autoPubsub) {
+            return;
+        }
+
         this.apiKey = config.apiKey;
 
         URI endpoint;
