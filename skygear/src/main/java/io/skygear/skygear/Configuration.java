@@ -29,16 +29,20 @@ public final class Configuration {
      */
     final boolean pubsubHandlerExecutionInBackground;
 
+    final boolean autoPubsub;
+
     private Configuration(
             String endpoint,
             String apiKey,
             String gcmSenderId,
-            boolean pubsubHandlerExecutionInBackground
+            boolean pubsubHandlerExecutionInBackground,
+            boolean autoPubsub
     ) {
         this.endpoint = endpoint;
         this.apiKey = apiKey;
         this.gcmSenderId = gcmSenderId;
         this.pubsubHandlerExecutionInBackground = pubsubHandlerExecutionInBackground;
+        this.autoPubsub = autoPubsub;
     }
 
     /**
@@ -86,6 +90,7 @@ public final class Configuration {
         return new Builder()
                 .endPoint(DEFAULT_BASE_URL)
                 .apiKey(DEFAULT_API_KEY)
+                .autoPubsub(true)
                 .build();
     }
 
@@ -97,6 +102,7 @@ public final class Configuration {
         private String apiKey;
         private String gcmSenderId;
         private boolean pubsubHandlerExecutionInBackground;
+        private boolean autoPubsub;
 
         /**
          * Sets the Skygear endpoint.
@@ -142,6 +148,11 @@ public final class Configuration {
             return this;
         }
 
+        public Builder autoPubsub(boolean autoPubsub) {
+            this.autoPubsub = autoPubsub;
+            return this;
+        }
+
         /**
          * Build a configuration.
          *
@@ -160,7 +171,8 @@ public final class Configuration {
                     this.endpoint,
                     this.apiKey,
                     this.gcmSenderId,
-                    this.pubsubHandlerExecutionInBackground
+                    this.pubsubHandlerExecutionInBackground,
+                    this.autoPubsub
             );
         }
     }
