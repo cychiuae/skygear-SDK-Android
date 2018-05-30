@@ -359,7 +359,9 @@ public final class Container implements AuthResolver {
         this.persistentStore.save();
 
         this.requestManager.accessToken = user != null ? user.accessToken : null;
-        this.registerDeviceToken(this.persistentStore.deviceToken);
+        if (this.persistentStore.deviceToken != null) {
+            this.registerDeviceToken(this.persistentStore.deviceToken);
+        }
     }
 
     /**
